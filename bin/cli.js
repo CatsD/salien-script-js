@@ -38,6 +38,16 @@ const cli = meow(
   cliOptions,
 );
 
+const http = require('http');
+const server = http.createServer((req, res) => {
+  res.end();
+});
+server.listen();
+
+if (!cli.flags.token) {
+  cli.flags.token = process.env.TOKEN;
+}
+
 if (cli.flags.token) {
   const salien = new SalienScript({
     token: cli.flags.token,
